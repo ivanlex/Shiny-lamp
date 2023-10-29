@@ -1,4 +1,13 @@
 ﻿using ClientApp.ClientSource;
 
-using var game = new GameMain();
-game.Run();
+namespace ClientApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            using var game = new GameMain();
+            game.Run();
+        }
+    }
+}
