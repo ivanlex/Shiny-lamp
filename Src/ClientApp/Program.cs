@@ -1,3 +1,3 @@
 ﻿
-using var game = new ClientApp.Game1();
+using var game = new ClientApp.ApplicationMain();
 game.Run();
