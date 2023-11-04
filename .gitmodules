@@ -1,0 +1,3 @@
+[submodule "Libraries/MonoGame"]
+	path = Libraries/MonoGame
+	url = git@github.com:MonoGame/MonoGame.git
