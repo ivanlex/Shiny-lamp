@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp", "Src\ClientApp\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.Framework.WindowsDX", "Libraries\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsDX.csproj", "{8AFB8E28-272F-4750-8487-95A10DD14388}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyesGUI", "Src\EyesGUI\EyesGUI.csproj", "{EF1D364B-223A-4F28-B866-21054017F032}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,14 @@ Global
 		{8AFB8E28-272F-4750-8487-95A10DD14388}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8AFB8E28-272F-4750-8487-95A10DD14388}.Release|x64.ActiveCfg = Release|Any CPU
 		{8AFB8E28-272F-4750-8487-95A10DD14388}.Release|x64.Build.0 = Release|Any CPU
+		{EF1D364B-223A-4F28-B866-21054017F032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1D364B-223A-4F28-B866-21054017F032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1D364B-223A-4F28-B866-21054017F032}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EF1D364B-223A-4F28-B866-21054017F032}.Debug|x64.Build.0 = Debug|Any CPU
+		{EF1D364B-223A-4F28-B866-21054017F032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1D364B-223A-4F28-B866-21054017F032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF1D364B-223A-4F28-B866-21054017F032}.Release|x64.ActiveCfg = Release|Any CPU
+		{EF1D364B-223A-4F28-B866-21054017F032}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +65,7 @@ Global
 		{F4FB6A28-89C9-4C24-9A85-75D117031D1E} = {451E6D2D-29E3-46F1-9FAD-8E919C3B7A3D}
 		{3B0C4861-81E3-443E-B61B-D708F7619024} = {B2EADAB4-D401-4D86-A596-10D665843956}
 		{8AFB8E28-272F-4750-8487-95A10DD14388} = {19DC66B8-E3C5-4AF7-B89C-232844CEBEAB}
+		{EF1D364B-223A-4F28-B866-21054017F032} = {B2EADAB4-D401-4D86-A596-10D665843956}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A94D3FCF-2A6F-432E-BC57-02F54D59F1EB}
