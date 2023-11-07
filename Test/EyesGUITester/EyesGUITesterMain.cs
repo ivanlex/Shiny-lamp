@@ -11,6 +11,8 @@ namespace EyesGUITester
         private SpriteBatch _spriteBatch;
         private MainScreen _screen;
 
+        private int _deltaTime;
+
         public EyesGUITesterMain()
         {
             _graphics = new GraphicsDeviceManager(this);

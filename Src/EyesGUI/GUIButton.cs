@@ -4,12 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 namespace EyesGUI
 {
     public delegate void ButtonClickHandler();
+    public delegate void ButtonDoubleClickHandler();
 
     public class GUIButton : GUIComponent
     {
         public Texture2D Foreground;
 
         public ButtonClickHandler OnClick;
+        public ButtonDoubleClickHandler OnDoubleClick;
 
         public GUIButton(Rectangle rectangle) : base(rectangle)
         {
@@ -30,6 +32,10 @@ namespace EyesGUI
                 if (PlayerInput.IsMouseClicked())
                 {
                     OnClick?.Invoke();
+                }
+                else if (PlayerInput.IsMouseDoubleClicked())
+                {
+                    OnDoubleClick?.Invoke();
                 }
             }
         }

@@ -1,32 +1,50 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace EyesGUI
 {
     public static class PlayerInput
     {
-        static MouseState oldMouseState;
-        static MouseState currentMouseState;
+        const int DoubleClickValidDistance = 5;
+
+        static MouseState _oldMouseState;
+        static MouseState _currentMouseState;
+
+        static bool _isLastTimeClicked = false;
+        static Vector2 _clickPosition;
 
         public static bool IsMouseClicked()
         {
-            return oldMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released;
+            return _oldMouseState.LeftButton == ButtonState.Pressed && _currentMouseState.LeftButton == ButtonState.Released;
+        }
+
+        public static bool IsMouseDoubleClicked()
+        {
+            var lastTime = _isLastTimeClicked;
+            var distance = Vector2.DistanceSquared(MousePosition, _clickPosition) < DoubleClickValidDistance * DoubleClickValidDistance;
+
+            return lastTime && distance;
         }
 
         public static Vector2 MousePosition
         {
-            get => new Vector2(currentMouseState.X, currentMouseState.Y);
+            get => new Vector2(_currentMouseState.X, _currentMouseState.Y);
         }
 
         public static void Update()
         {
-            oldMouseState = currentMouseState;
-            currentMouseState = Mouse.GetState();
+            // For last time
+            _isLastTimeClicked = IsMouseClicked();
+
+            if (_isLastTimeClicked)
+            {
+                _clickPosition = new Vector2(_currentMouseState.X, _currentMouseState.Y);
+            }
+
+            // For current time
+            _oldMouseState = _currentMouseState;
+            _currentMouseState = Mouse.GetState();
         }
     }
 }

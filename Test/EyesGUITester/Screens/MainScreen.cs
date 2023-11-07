@@ -19,9 +19,13 @@ namespace EyesGUITester.Screens
         {
             _button1 = new GUIButton(new Rectangle(Margin, 10, ButtonWidth, ButtonHeight))
             {
-                OnClick = () =>
+                //OnClick = () =>
+                //{
+                //    MessageBox.Show("Hello World");
+                //},
+                OnDoubleClick = () =>
                 {
-                    MessageBox.Show("Hello World");
+                    MessageBox.Show("Double World");
                 }
             };
             _button2 = new GUIButton(new Rectangle(_button1.Rect.X + _button1.Rect.Width + Margin, 10, ButtonWidth, ButtonHeight));
