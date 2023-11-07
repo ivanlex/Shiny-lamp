@@ -8,9 +8,6 @@ namespace TryFeature
         static void Main(string[] args)
         {
             SimulationMultithread();
-
-            AppDomainSetup setup;
-
         }
 
         static void SimulationMultithread()
