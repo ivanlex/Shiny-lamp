@@ -4,14 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 namespace EyesGUI
 {
     public delegate void ButtonClickHandler();
-    public delegate void ButtonDoubleClickHandler();
+    public delegate void ButtonRightClickHandler();
+    public delegate void ButtonMiddleClickHandler();
+    public delegate void ButtonWheeledHandler(int positionChanged);
 
     public class GUIButton : GUIComponent
     {
         public Texture2D Foreground;
 
         public ButtonClickHandler OnClick;
-        public ButtonDoubleClickHandler OnDoubleClick;
+        public ButtonRightClickHandler OnRightClick;
+        public ButtonMiddleClickHandler OnMiddleClick;
+        public ButtonWheeledHandler OnWheeled;
 
         public GUIButton(Rectangle rectangle) : base(rectangle)
         {
@@ -33,9 +37,17 @@ namespace EyesGUI
                 {
                     OnClick?.Invoke();
                 }
-                else if (PlayerInput.IsMouseDoubleClicked())
+                else if (PlayerInput.IsMouseRightClicked())
                 {
-                    OnDoubleClick?.Invoke();
+                    OnRightClick?.Invoke();
+                }
+                else if (PlayerInput.IsMouseMiddleClicked())
+                {
+                    OnMiddleClick?.Invoke();
+                }
+                else if (PlayerInput.IsMouseWheeled())
+                {
+                    OnWheeled?.Invoke(PlayerInput.HorizontalScrollWheelOffset);
                 }
             }
         }

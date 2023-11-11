@@ -6,25 +6,33 @@ namespace EyesGUI
 {
     public static class PlayerInput
     {
-        const int DoubleClickValidDistance = 5;
-
         static MouseState _oldMouseState;
         static MouseState _currentMouseState;
-
-        static bool _isLastTimeClicked = false;
-        static Vector2 _clickPosition;
 
         public static bool IsMouseClicked()
         {
             return _oldMouseState.LeftButton == ButtonState.Pressed && _currentMouseState.LeftButton == ButtonState.Released;
         }
 
+        public static bool IsMouseRightClicked()
+        {
+            return _oldMouseState.RightButton == ButtonState.Pressed && _currentMouseState.RightButton == ButtonState.Released;
+        }
+
+        public static bool IsMouseMiddleClicked()
+        {
+            return _oldMouseState.MiddleButton == ButtonState.Pressed && _currentMouseState.MiddleButton == ButtonState.Released;
+        }
+
+        [Obsolete]
         public static bool IsMouseDoubleClicked()
         {
-            var lastTime = _isLastTimeClicked;
-            var distance = Vector2.DistanceSquared(MousePosition, _clickPosition) < DoubleClickValidDistance * DoubleClickValidDistance;
+            throw new NotImplementedException();
+        }
 
-            return lastTime && distance;
+        public static bool IsMouseWheeled()
+        {
+            return HorizontalScrollWheelOffset > 0;
         }
 
         public static Vector2 MousePosition
@@ -32,16 +40,13 @@ namespace EyesGUI
             get => new Vector2(_currentMouseState.X, _currentMouseState.Y);
         }
 
+        public static int HorizontalScrollWheelOffset
+        {
+            get => _currentMouseState.HorizontalScrollWheelValue - _oldMouseState.HorizontalScrollWheelValue;
+        }
+
         public static void Update()
         {
-            // For last time
-            _isLastTimeClicked = IsMouseClicked();
-
-            if (_isLastTimeClicked)
-            {
-                _clickPosition = new Vector2(_currentMouseState.X, _currentMouseState.Y);
-            }
-
             // For current time
             _oldMouseState = _currentMouseState;
             _currentMouseState = Mouse.GetState();
