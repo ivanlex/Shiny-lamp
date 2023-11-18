@@ -18,6 +18,10 @@ namespace EyesGUI
         /// </summary>
         public Rectangle Rect { get; set; }
         /// <summary>
+        /// The Asset for GUIComponent
+        /// </summary>
+        public string AssetKey { get; set; }
+        /// <summary>
         /// The point for position and resize control
         /// </summary>
         public Point Anchor { get; set; }
@@ -26,10 +30,16 @@ namespace EyesGUI
         /// </summary>
         public Point Pivot { get; set; }
 
+        protected abstract void LoadContent();
 
-        public GUIComponent(Rectangle rectangle)
+        public GUIComponent(Rectangle rectangle) : this(rectangle, string.Empty) { }
+
+        public GUIComponent(Rectangle rectangle, string assetKey)
         {
             Rect = rectangle;
+            AssetKey = assetKey;
+
+            LoadContent();
         }
 
         /// <summary>

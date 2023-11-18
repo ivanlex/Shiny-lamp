@@ -1,15 +1,74 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace EyesGUI
 {
-    public static class GUI
+    public class GUI
     {
-        public static ContentManager Content { get; set; }
+        private static object _lock = new object();
+        private static GUI _instance;
 
-        public static GUIComponent Frame { get; set; }
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private ContentManager _content;
+        private GUIComponent _frame;
 
-        public static void DrawChildren(GUIComponent Frame, SpriteBatch spriteBatch)
+        public ContentManager Content
+        {
+            get => _content;
+        }
+
+        public SpriteBatch SpriteBatch
+        {
+            get => _spriteBatch;
+        }
+
+        public GraphicsDeviceManager Graphics
+        {
+            get => _graphics;
+        }
+
+        public GUIComponent Frame
+        {
+            get => _frame;
+            set => _frame = value;
+        }
+
+        public static GUI Instance
+        {
+            get
+            {
+                lock(_lock)
+                {
+                    if(_instance == null)
+                    {
+                        lock (_lock)
+                        {
+                            _instance = new GUI();
+                        }
+                    }
+
+                    return _instance;
+                }
+            }
+        }
+
+        private GUI() { }
+
+        public void Prepare(Game game)
+        {
+            _graphics = new GraphicsDeviceManager(game);
+
+        }
+
+        public void Initial(Game game)
+        {
+            _spriteBatch = new SpriteBatch(game.GraphicsDevice);
+            TextureManager.Instance.Initialize(_graphics.GraphicsDevice);
+        }
+
+        public void DrawChildren(GUIComponent Frame, SpriteBatch spriteBatch)
         {
             if (Frame.Children != null)
             {
@@ -22,7 +81,7 @@ namespace EyesGUI
             }
         }
 
-        public static void UpdateChildren(GUIComponent Frame)
+        public void UpdateChildren(GUIComponent Frame)
         {
             if (Frame.Children != null)
             {
@@ -35,21 +94,21 @@ namespace EyesGUI
             }
         }
 
-        public static void Update()
+        public void Update()
         {
-            if (Frame != null)
+            if (_frame != null)
             {
-                Frame.Update();
-                UpdateChildren(Frame);
+                _frame.Update();
+                UpdateChildren(_frame);
             }
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-            if (Frame != null)
+            if (_frame != null)
             {
-                Frame.Draw(spriteBatch);
-                DrawChildren(Frame, spriteBatch);
+                _frame.Draw(_spriteBatch);
+                DrawChildren(_frame, _spriteBatch);
             }
         }
     }

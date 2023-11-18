@@ -17,14 +17,12 @@ namespace EyesGUI
         public ButtonMiddleClickHandler OnMiddleClick;
         public ButtonWheeledHandler OnWheeled;
 
-        public GUIButton(Rectangle rectangle) : base(rectangle)
-        {
-            LoadContent();
-        }
+        public GUIButton(Rectangle rectangle) : base(rectangle) { }
+        public GUIButton(Rectangle rectangle, string assetKey) : base(rectangle, assetKey) { }
 
-        private void LoadContent()
+        protected override void LoadContent()
         {
-            Foreground = GUI.Content.Load<Texture2D>("Textures/TextureSample");
+            Foreground = TextureManager.Instance.GetTexture(AssetKey);
         }
 
         public override void Update()

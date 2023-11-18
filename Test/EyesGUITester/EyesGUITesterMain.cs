@@ -7,20 +7,16 @@ namespace EyesGUITester
 {
     public class EyesGUITesterMain : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
         private MainScreen _screen;
 
         private int _deltaTime;
 
         public EyesGUITesterMain()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            GUI.Instance.Prepare(this);
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-            GUI.Content = Content;
-
             Window.AllowUserResizing = true;
         }
 
@@ -31,20 +27,21 @@ namespace EyesGUITester
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            GUI.Instance.Initial(this);
+
             _screen = new MainScreen(
                 new Rectangle(
-                    0, 0, 
-                    _graphics.GraphicsDevice.Viewport.Width,
-                    _graphics.GraphicsDevice.Viewport.Height
-            ));
+                    0, 0,
+                    GUI.Instance.Graphics.GraphicsDevice.Viewport.Width,
+                    GUI.Instance.Graphics.GraphicsDevice.Viewport.Height)
+            );
 
-            GUI.Frame = _screen;
+            GUI.Instance.Frame = _screen;
         }
 
         protected override void Update(GameTime gameTime)
         {
-            GUI.Update();
+            GUI.Instance.Update();
             PlayerInput.Update();
 
             base.Update(gameTime);
@@ -53,7 +50,7 @@ namespace EyesGUITester
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            GUI.Draw(_spriteBatch);
+            GUI.Instance.Draw();
 
             base.Draw(gameTime);
         }

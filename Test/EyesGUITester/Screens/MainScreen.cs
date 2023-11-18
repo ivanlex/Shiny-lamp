@@ -33,5 +33,10 @@ namespace EyesGUITester.Screens
             Children.Add(_button2);
             Children.Add(_button3);
         }
+
+        protected override void LoadContent()
+        {
+            
+        }
     }
 }
