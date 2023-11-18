@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace EyesGUI
 {
@@ -22,7 +23,19 @@ namespace EyesGUI
 
         protected override void LoadContent()
         {
-            Foreground = TextureManager.Instance.GetTexture(AssetKey);
+            try
+            {
+                Foreground = TextureManager.Instance.GetTexture(AssetKey);
+            }
+            catch (TextureNotFoundException ex)
+            {
+                Foreground = TextureManager.Instance.GetTexture(TextureManager.DefaultTexture);
+                Debug.WriteLine(ex.Message);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public override void Update()

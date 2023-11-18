@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EyesGUI
 {
@@ -13,6 +14,7 @@ namespace EyesGUI
         private SpriteBatch _spriteBatch;
         private ContentManager _content;
         private GUIComponent _frame;
+        private Game _game;
 
         public ContentManager Content
         {
@@ -35,6 +37,8 @@ namespace EyesGUI
             set => _frame = value;
         }
 
+        private GUI() { }
+
         public static GUI Instance
         {
             get
@@ -54,18 +58,25 @@ namespace EyesGUI
             }
         }
 
-        private GUI() { }
-
         public void Prepare(Game game)
         {
-            _graphics = new GraphicsDeviceManager(game);
+            _game = game;
 
+            _graphics = new GraphicsDeviceManager(_game);
+            _graphics.IsFullScreen = true;
+
+            _content = _game.Content;
+
+            _game.Content.RootDirectory = "Content";
+            _game.IsMouseVisible = true;
+            _game.Window.AllowUserResizing = true;
+            
         }
 
-        public void Initial(Game game)
+        public void Initial()
         {
-            _spriteBatch = new SpriteBatch(game.GraphicsDevice);
-            TextureManager.Instance.Initialize(_graphics.GraphicsDevice);
+            _spriteBatch = new SpriteBatch(_game.GraphicsDevice);
+            TextureManager.Instance.Initialize(_graphics.GraphicsDevice, _content);
         }
 
         public void DrawChildren(GUIComponent Frame, SpriteBatch spriteBatch)

@@ -9,15 +9,9 @@ namespace EyesGUITester
     {
         private MainScreen _screen;
 
-        private int _deltaTime;
-
         public EyesGUITesterMain()
         {
             GUI.Instance.Prepare(this);
-
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-            Window.AllowUserResizing = true;
         }
 
         protected override void Initialize()
@@ -27,7 +21,7 @@ namespace EyesGUITester
 
         protected override void LoadContent()
         {
-            GUI.Instance.Initial(this);
+            GUI.Instance.Initial();
 
             _screen = new MainScreen(
                 new Rectangle(
