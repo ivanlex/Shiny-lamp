@@ -8,6 +8,8 @@ namespace ClientApp
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Texture2D _signature;
+        private Rectangle _signaturePosition;
 
         public ApplicationMain()
         {
@@ -26,7 +28,8 @@ namespace ClientApp
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            _signature = Content.Load<Texture2D>("Images/Signature");
+            _signaturePosition = new Rectangle(0, 0,_signature.Width, _signature.Height);
             // TODO: use this.Content to load your game content here
         }
 
@@ -35,16 +38,18 @@ namespace ClientApp
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+
+            _spriteBatch.Draw(_signature, _signaturePosition, Color.White);
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

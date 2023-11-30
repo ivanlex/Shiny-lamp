@@ -1,4 +1,5 @@
-﻿using TryFeature.Characters.Abstracts;
+﻿using System.Diagnostics;
+using TryFeature.Characters.Abstracts;
 using TryFeature.Characters.Factories;
 
 namespace TryFeature
@@ -7,10 +8,29 @@ namespace TryFeature
     {
         static void Main(string[] args)
         {
-            SimulationMultithread();
+            GetNanoSecondsForNow();
+        }
 
-            AppDomainSetup setup;
+        static void GetNanoSecondsForNow()
+        {
+            double _GetNanoSecondsForNow()
+            {
+                var timestamp = Stopwatch.GetTimestamp();
+                var nanoseconds = 1000000000 * timestamp / Stopwatch.Frequency;
+                return nanoseconds;
+            }
 
+            var t1 = _GetNanoSecondsForNow();
+            var t2 = _GetNanoSecondsForNow();
+            var delta = t2 - t1;
+            Console.WriteLine($"Delta time for t2 and t1 is {delta}");
+        }
+
+        static void FasterMethodToDividedByX()
+        {
+            var i = 17;
+            var dividedByBit = 1;
+            Console.WriteLine($"i={i}, i >> {dividedByBit} = {i >> dividedByBit}");
         }
 
         static void SimulationMultithread()
