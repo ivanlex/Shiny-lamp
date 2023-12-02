@@ -63,7 +63,7 @@ namespace EyesGUI
             _game = game;
 
             _graphics = new GraphicsDeviceManager(_game);
-            _graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = false;
 
             _content = _game.Content;
 
